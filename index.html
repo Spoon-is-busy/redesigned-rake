@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Baby Monitor</title>
+    <style>
+        /* CSS styles for the app */
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        #app-container {
+            text-align: center;
+            margin: 20px;
+        }
+
+        #video-feed {
+            width: 100%;
+            max-width: 640px;
+            margin: 0 auto;
+        }
+
+        #baby-status {
+            font-size: 24px;
+            margin-top: 20px;
+        }
+
+        #audio-player {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="app-container">
+        <h1>AI Baby Monitor</h1>
+        <video id="video-feed" autoplay playsinline></video>
+        <p id="baby-status">Baby is asleep.</p>
+        <audio id="audio-player" controls>
+            <source src="lullaby.mp3" type="audio/mpeg">
+        </audio>
+    </div>
+
+    <script>
+        // JavaScript code for the app
+        const videoElement = document.getElementById('video-feed');
+        const babyStatusElement = document.getElementById('baby-status');
+        const audioPlayer = document.getElementById('audio-player');
+
+        // Simulate receiving AI baby monitoring data
+        function simulateMonitoringData() {
+            // Simulate AI analysis results (e.g., whether the baby is asleep or awake)
+            const babyIsAsleep = Math.random() < 0.5;
+
+            // Update the UI based on AI analysis
+            if (babyIsAsleep) {
+                babyStatusElement.textContent = 'Baby is asleep.';
+                // Play lullaby when the baby is asleep
+                audioPlayer.play();
+            } else {
+                babyStatusElement.textContent = 'Baby is awake.';
+                audioPlayer.pause();
+            }
+        }
+
+        // Simulate video feed (replace with actual video streaming)
+        function startVideoFeed() {
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then((stream) => {
+                    videoElement.srcObject = stream;
+                })
+                .catch((error) => {
+                    console.error('Error accessing the camera:', error);
+                });
+        }
+
+        // Start the video feed and simulate monitoring data
+        startVideoFeed();
+        setInterval(simulateMonitoringData, 5000); // Simulate every 5 seconds
+    </script>
+</body>
+</html>
